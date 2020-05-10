@@ -1,0 +1,52 @@
+body {
+  overflow-x: hidden;
+}
+
+.app {
+  height: 100vh;
+  width: 100vw;
+}
+
+.playground {
+  width: 83%;
+  height: 100%;
+  margin-left: 220px;
+}
+
+#ace-picode-editor,
+.ace_editor {
+  height: 50% !important;
+}
+
+.table {
+  height: 50%;
+}
+
+/***************************/
+.sidebar {
+  position: fixed;
+  height: 100%;
+  width: 200px;  
+  background-color: rgb(46, 48, 48);
+  color: #ffffff;
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  animation: fadeIn 250ms ease-in-out both;
+}
+
+/***************************/
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

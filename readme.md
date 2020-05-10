@@ -1,24 +1,13 @@
-<img src="https://static.begin.app/node-crud/readme-banner.png" width="641">
+# demonstration of [react](https://reactjs.org/) + [sql.js](https://github.com/sql-js/sql.js)
 
-[![Begin build status](https://buildstatus.begin.app/donut-j62/status.svg)](https://begin.com)
+This is a template repository demonstrating the use of sql.js with create-react-app.
 
-A super simple Begin **c**reate **r**ead **u**pdate **d**elete app that exemplifies a basic todo app that uses one static html page and three API endpoints.
-
-## Deploy your own
-
-[![Deploy to Begin](https://static.begin.com/deploy-to-begin.svg)](https://begin.com/apps/create?template=https://github.com/begin-examples/node-crud)
-
-Deploy your own clone of this app to Begin!
-
-## Getting started
-
-- Start the local dev server: `npm start`
-- Lint your code: `npm run lint`
-- Run your tests: `npm t`
-
-## Reference
-
-- [Quickstart](https://docs.begin.com/en/guides/quickstart/) - basics on working locally, project structure, deploying, and accessing your Begin app
-- [Creating new routes](https://docs.begin.com/en/functions/creating-new-functions) - basics on expanding the capabilities of your app
-
-Head to [docs.begin.com](https://docs.begin.com/) to learn more!
+The only differences with a traditional create-react-app application are :
+ - The usage of [react-app-rewired](https://www.npmjs.com/package/react-app-rewired) to allow providing a custom [webpack](https://webpack.js.org/) configuration
+ - a custom [`config-overrides.js`](./config-overrides.js) to copy the wasm module from sql.js to the distributed assets
+ 
+ Note that you should make sure your server serves `.wasm` files with the right mimetype, that is: `application/wasm`. Otherwise, you'll see the following warning in the console: `TypeError: Response has unsupported MIME type`
+ 
+ See [`src/App.js`](./src/App.js) for the code.
+ 
+ ### [view the live demo](https://sqljs-react-demo.netlify.com/)
