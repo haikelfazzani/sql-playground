@@ -3,11 +3,14 @@
   min-width: 200px;
   margin-left: -125px;
   color: #fff;
+
   text-align: center;
   padding: 10px 15px;
+  
   position: fixed;
   left: 50%;
   bottom: 30px;
+
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;

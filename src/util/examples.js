@@ -3,6 +3,7 @@ export default function createInitTables () {
     id serial,
     title varchar(100) NOT NULL,
     author varchar(100) NOT NULL,
+    price int,
     PRIMARY KEY (id)
   );
 
@@ -15,10 +16,12 @@ export default function createInitTables () {
     FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
   );
   
-  INSERT INTO books (id, title, author) VALUES
-    (1, 'My First SQL Book', 'Mary Parker'),
-    (2, 'My Second SQL Book', 'John Mayer'),
-    (3, 'My First SQL Book', 'Cary Flint');
+  INSERT INTO books (id, title, author, price) VALUES
+    (1, 'Java book', 'Sam doe', 150),
+    (2, 'Python book', 'Mike doe', 80),
+    (3, 'Golang book', 'Joe doe', 250),
+    (4, 'Php book', 'Joe doe', 250),
+    (5, 'Elixir book', 'Joe doe', 250);
   
   
   INSERT INTO reviews (id, book_id, reviewer_name, content) VALUES
@@ -26,5 +29,6 @@ export default function createInitTables () {
     (2, 2, 'John Smith', 'My second review'),
     (3, 2, 'Alice Walker', 'Another review');
     
-    select * from books b join reviews r on b.id = r.book_id;`
+    select * from books;
+    select * from reviews;`
 }

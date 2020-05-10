@@ -1,33 +1,52 @@
 import React from 'react';
-import AceEditor from "react-ace";
+import { UnControlled as CodeMirror } from 'react-codemirror2';
 
-import "ace-builds/src-noconflict/theme-dracula";
-import "ace-builds/src-noconflict/mode-sql";
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/eclipse.css';
 
-/*eslint-disable no-alert, no-console */
-import "ace-builds/src-noconflict/ext-language_tools";
+import 'codemirror/mode/sql/sql';
 
-export default function CodeEditor ({ value, onChange }) {
+import 'codemirror/addon/hint/show-hint';
+import 'codemirror/addon/hint/sql-hint';
 
-  return <AceEditor
-    mode="sql"
-    theme="dracula"
-    onChange={onChange}
-    value={value}
-    name="ace-picode-editor"
-    fontSize="14px"
-    showPrintMargin={true}
-    showGutter={true}
-    highlightActiveLine={false}
+import 'codemirror/addon/hint/show-hint.css';
+import 'codemirror/addon/fold/foldgutter.css'
 
-    width="100%"
-    editorProps={{ $blockScrolling: true }}
-    setOptions={{
-      enableBasicAutocompletion: true,
-      enableLiveAutocompletion: true,
-      showLineNumbers: true,
-      tabSize: 2,
-      useWorker: true
-    }}
-  />;
+import 'codemirror/addon/fold/foldcode';
+import 'codemirror/addon/fold/foldgutter';
+import 'codemirror/addon/fold/brace-fold';
+import 'codemirror/addon/fold/xml-fold';
+
+import 'codemirror/addon/comment/comment';
+
+
+export default function Editor ({ onChange, value }) {
+
+  const onKeyDown = (editor, event) => {
+
+    if (event.ctrlKey && (event.keyCode === 58 || event.keyCode === 191)) {
+      editor.execCommand('toggleComment')
+    }
+
+    if (!event.ctrlKey && event.keyCode > 64 && event.keyCode < 123) {
+      setTimeout(() => { editor.showHint(); }, 250);
+    }
+  }
+
+  return (
+    <CodeMirror
+      autoCursor={false}
+      onChange={onChange}
+      value={value}
+      onKeyDown={onKeyDown}
+      options={{
+        mode: 'sql',
+        theme: 'eclipse',
+        lineNumbers: true,
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+      }}
+    />
+  );
+
 }

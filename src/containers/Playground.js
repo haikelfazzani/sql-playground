@@ -7,6 +7,8 @@ import Table from '../components/Table';
 import createInitTables from "../util/examples";
 import Snackbar from "../components/Snackbar";
 import { GlobalContext } from "../state/GlobalContext";
+import SplitPane from "../components/SplitPane";
+import Navbar from "./Navbar";
 
 export default class Playground extends React.Component {
 
@@ -70,8 +72,11 @@ export default class Playground extends React.Component {
     }
   }
 
-  onEditorChange (value) {
-    this.setState({ ...this.state, editorVal: value });
+  onEditorChange (v, e, value) {
+    if (value && value.length > 10) {
+      this.setState({ ...this.state, editorVal: value });
+      localStorage.setItem('siql-query', this.state.editorVal);
+    }
   }
 
   onBeautify () {
@@ -83,24 +88,34 @@ export default class Playground extends React.Component {
     let { db, err, results, editorVal } = this.state;
     if (!db) return <pre>Loading...</pre>;
     return (
-      <div className="playground py-3">
+      <main className="h-100">
 
-        <button className="btn-run" onClick={this.onExecute}>Run</button>
-        <button className="btn-run mb-3" onClick={this.onBeautify}>format</button>
+        <nav className="py-3 d-flex">
+          <button className="btn btn-light mr-3" onClick={this.onExecute}>
+            <i className="fa fa-play"></i> Run Code</button>
+          <button className="btn btn-success" onClick={this.onBeautify}>Format</button>
 
-        <CodeEditor onChange={this.onEditorChange} value={editorVal} />
+          <Navbar />
+        </nav>
 
-        <div className="row mt-3">
-          {results
-            ? results.map(({ columns, values }, id) => <div key={id} className="col">
-              <Table columns={columns} values={values} />
-            </div>) // results contains one object per select statement in the query
-            : ""
-          }
+        <div className="playground">
+
+          <SplitPane>
+            <div className="editor"><CodeEditor onChange={this.onEditorChange} value={editorVal} /></div>
+
+            <div className="row">
+              {results
+                ? results.map(({ columns, values }, id) => <div key={id} className="col">
+                  <Table columns={columns} values={values} />
+                </div>) // results contains one object per select statement in the query
+                : ""
+              }
+            </div>
+          </SplitPane>
         </div>
 
         <Snackbar txt={(err || "").toString()} show={err} />
-      </div>
+      </main>
     );
   }
 }

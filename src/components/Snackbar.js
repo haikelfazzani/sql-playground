@@ -9,9 +9,9 @@ export default function Snackbar ({ txt, show = false }) {
     setIsOpen(show);
   }, [show]);
 
-  return <div
+  return <span
     className={"bg-danger snackbar " + (isOpen ? "show" : "")}
     onClick={() => { setIsOpen(!isOpen) }}>
     <i className="fas fa-info-circle"></i> {txt}
-  </div>;
+  </span>;
 }
