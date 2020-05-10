@@ -1,11 +1,7 @@
 {
-  "name": "react-sqljs-demo",
+  "name": "react-sql",
   "version": "1.0.0",
-  "description": "sql.js + react example starter project",
-  "keywords": [
-    "react",
-    "starter"
-  ],
+  "description": "sql playground",
   "main": "src/index.js",
   "license": "MIT",
   "dependencies": {

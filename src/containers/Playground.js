@@ -33,6 +33,16 @@ export default class Playground extends React.Component {
         this.setState({ ...this.state, editorVal: '' });
       })
       .catch(err => this.setState({ err }));
+
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.keyCode === 13) {
+        this.onExecute(this.state.editorVal);
+      }
+
+      if (e.ctrlKey && e.altKey && e.keyCode === 70) {
+        this.onBeautify();
+      }
+    });
   }
 
   onExecute () {
