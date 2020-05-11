@@ -8,7 +8,8 @@ import createInitTables from "../util/examples";
 import Snackbar from "../components/Snackbar";
 import { GlobalContext } from "../state/GlobalContext";
 import SplitPane from "../components/SplitPane";
-import Navbar from "./Navbar";
+import CreatedTables from "./CreatedTables";
+import SelectFont from "../components/SelectFont";
 
 export default class Playground extends React.Component {
 
@@ -92,14 +93,27 @@ export default class Playground extends React.Component {
     return (
       <main className="col-sm-12 col-md-9 col-xl-10 mb-5 pl-md-5 bd-content">
 
-        <nav className="mb-3 d-flex">
-          <button className="btn btn-warning mr-3" onClick={this.onExecute}>
-            <i className="fa fa-play"></i> Run Code</button>
-          <button className="btn btn-dark" onClick={this.onBeautify}>
-          <i className="fa fa-stream"></i> Format Code</button>
+        <nav className="mb-3 d-flex justify-content-between">
 
-          <Navbar />
+          <div className="d-flex">
+            <button className="btn btn-warning mr-3" onClick={this.onExecute}>
+              <i className="fa fa-play"></i> Run</button>
+
+            <button className="btn btn-dark d-small-none" onClick={this.onBeautify}>
+              <i className="fa fa-stream"></i> Beautify
+          </button>
+
+            <CreatedTables />
+          </div>
+
+          <div className="d-flex">
+            <SelectFont />
+            <a className="btn btn-dark ml-3" href="https://github.com/haikelfazzani/kody-web-editor">
+              <i className="fab fa-github"></i>
+            </a>
+          </div>
         </nav>
+
 
         <div className="playground">
 

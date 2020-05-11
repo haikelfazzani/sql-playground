@@ -25,10 +25,12 @@ DROP TABLE table_name;`
 
 -- Example
 
-INSERT INTO teams (id, team_name, since, country) 
+INSERT INTO teams (team_name, since, country) 
   VALUES
-    (8, 'Borussia Dortmund', 1909, 'Germany'),
-    (9, 'Barcelona Fc', 1892, 'Spain');`
+    ('Borussia Dortmund', 1909, 'Germany'),
+    ('Barcelona Fc', 1892, 'Spain');
+    
+SELECT * FROM teams;`
   },
   {
     lesson: 'UPDATE', img: '', desc: `

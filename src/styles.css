@@ -83,13 +83,17 @@ body {
 
 /***************************/
 .btn {
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 0;
   box-shadow: 0 6px 16px 0 rgba(0, 0, 0, .2);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
+/*****************************/
+.fs-12 {font-size: 12px;}
+.border-black {border-top: 2px solid #3e444a;}
+.ltsp2 {letter-spacing: 2px;}
 /***************************/
 @keyframes fadeIn {
   from {
@@ -118,4 +122,5 @@ body {
   .sidebar {
     display: none;
   }
+  .d-small-none {display: none;}
 }
