@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import lessons from '../util/lessons';
 import Alert from '../components/Alert';
-import lessonsTwo from '../util/lessonsTwo';
+import sqlquestions from '../util/sqlquestions';
 
 export default function Sidebar () {
 
@@ -30,15 +30,15 @@ export default function Sidebar () {
     </ul>
 
     <div className="w-100 bg-success pl-4 py-2">
-      <i className="fa fa-database mr-2"></i>Tutorials
+      <i className="fa fa-brain mr-2"></i>Practice
     </div>
 
     <ul className="list-group">
-      {lessonsTwo.map((l, i) => {
+      {sqlquestions.map((l, i) => {
         i = i + lessons.length
         return <li
           className="list-group-item bg-dark"
-          key={'lesson' + i}
+          key={'question' + i}
           onClick={() => { onLessonClick(i) }}>
           {l.lesson}
           <Alert lesson={l.lesson} img={l.img} desc={l.desc} show={state.currLessonIndex === i} />

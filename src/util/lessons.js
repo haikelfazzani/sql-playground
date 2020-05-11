@@ -74,7 +74,8 @@ SELECT DISTINCT team_id FROM players;`
   },
   {
     lesson: 'LIKE', img: '', desc: `
-> The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+> The LIKE operator is used in a WHERE clause 
+to search for a specified pattern in a column.
 
 -- Example
 
@@ -82,7 +83,8 @@ SELECT * FROM teams WHERE team_name LIKE 'a%';`
   },
   {
     lesson: 'BETWEEN', img: '', desc: `
-> The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+> The BETWEEN operator selects values within a given range. 
+The values can be numbers, text, or dates.
 
 -- Example
 
@@ -126,7 +128,8 @@ SELECT COUNT(country), country FROM teams GROUP BY country;`
   },
   {
     lesson: 'HAVING', img: '', desc: `
-> The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions..
+> The HAVING clause was added to SQL because the WHERE keyword 
+could not be used with aggregate functions..
 
 -- Example
 
@@ -147,7 +150,8 @@ INNER JOIN players ON teams.id = players.team_id;`
   },
   {
     lesson: 'LEFT JOIN', img: 'https://i.ibb.co/ZLqjfQn/img-leftjoin.gif', desc: `
-> The LEFT JOIN keyword returns all records from the left table (table1), and the matched records from the right table (table2).
+> The LEFT JOIN keyword returns all records from the left table (table1), 
+and the matched records from the right table (table2).
 
 -- Example
 
@@ -155,7 +159,32 @@ SELECT teams.team_name, players.player_name
 FROM teams
 LEFT JOIN players ON teams.id = players.team_id
 ORDER BY teams.team_name;`
-  }
+  },
+  {
+    lesson: 'FOREIGN KEY', img: '',
+    desc: `
+> The CREATE TABLE statement is used to create a new table in a database.
+
+-- Example
+
+CREATE TABLE countries (
+  country_id INTEGER PRIMARY KEY,
+  name varchar(100) NOT NULL,
+  continental_id_fk int,
+  FOREIGN KEY (continental_id_fk) REFERENCES continentals(id)
+);
+
+CREATE TABLE continentals (
+  continental_id INTEGER PRIMARY KEY,
+  name varchar(100) NOT NULL
+);
+
+INSERT INTO continentals (name) VALUES ('Africa'),('Europe');
+INSERT INTO countries (name, continental_id_fk) VALUES ('Tunisia', 1),('England', 2);
+
+SELECT * FROM continentals;
+SELECT * FROM countries;`
+  },
 ];
 
 export default lessons;

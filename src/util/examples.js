@@ -21,7 +21,8 @@ export default function createInitTables () {
     ('Ac Milan', 1899, 'Italia'),
     ('Liverpool', 1892, 'England'),
     ('Bayern Munich', 1900, 'Germany'),
-    ('Ajax Fc', 1900, 'Dutch');
+    ('Ajax Fc', 1900, 'Dutch'),
+    ('West Ham United', 1895, 'England');
   
   
   INSERT INTO players (team_id, player_name, age) VALUES
@@ -31,7 +32,8 @@ export default function createInitTables () {
     (1, 'Olivier Giroud', 33),
     (2, 'Karim Benzema', 32),
     (3, 'Blaise Matuidi', 33),
-    (3, 'Adrien Rabiot', 25);
+    (3, 'Adrien Rabiot', 25),
+    (8, 'Angelo Ogbonna', 31);
     
     select * from teams;
     select * from players;`
