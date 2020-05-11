@@ -2,7 +2,7 @@ import React from 'react';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/eclipse.css';
+import 'codemirror/theme/mbo.css';
 
 import 'codemirror/mode/sql/sql';
 
@@ -41,7 +41,7 @@ export default function Editor ({ onChange, value }) {
       onKeyDown={onKeyDown}
       options={{
         mode: 'sql',
-        theme: 'eclipse',
+        theme: 'mbo',
         lineNumbers: true,
         foldGutter: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]

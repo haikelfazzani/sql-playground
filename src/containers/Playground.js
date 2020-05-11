@@ -88,12 +88,13 @@ export default class Playground extends React.Component {
     let { db, err, results, editorVal } = this.state;
     if (!db) return <pre>Loading...</pre>;
     return (
-      <main className="h-100">
+      <main className="col-md-9 col-xl-10 mb-5 pl-md-5 bd-content">
 
-        <nav className="py-3 d-flex">
-          <button className="btn btn-light mr-3" onClick={this.onExecute}>
+        <nav className="mb-3 d-flex">
+          <button className="btn btn-warning mr-3" onClick={this.onExecute}>
             <i className="fa fa-play"></i> Run Code</button>
-          <button className="btn btn-success" onClick={this.onBeautify}>Format</button>
+          <button className="btn btn-dark" onClick={this.onBeautify}>
+          <i className="fa fa-stream"></i> Format Code</button>
 
           <Navbar />
         </nav>

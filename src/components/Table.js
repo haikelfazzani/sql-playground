@@ -7,10 +7,10 @@ const Td = (row) => {
 }
 
 export default function Table ({ columns, values }) {
-  return (<table className="table table-striped table-bordered mt-3">
-    <thead className="thead-dark">
+  return (<table className="table table-dark table-striped table-bordered mt-3">
+    <thead>
       <tr>
-        {columns.map((columnName, i) => <th scope="col" key={'col' + i}>{columnName}</th>)}
+        {columns.map((columnName, i) => <th scope="col" key={'col' + i} className="text-warning">{columnName}</th>)}
       </tr>
     </thead>
 

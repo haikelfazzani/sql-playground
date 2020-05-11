@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../state/GlobalContext';
+import SelectFont from '../components/SelectFont';
 
 const DropdownMenu = ({ cols }) => (
   <>{cols.map((col, i) => <span className="dropdown-item" key={'colt' + i}>{col}</span>)}</>
@@ -39,13 +40,15 @@ export default function Navbar () {
 
   return (<>
 
+    <SelectFont />
+
     {globalState.tableAnCols
       && Object.keys(globalState.tableAnCols).map((keyTable, i) => {
         let table = globalState.tableAnCols[keyTable];
 
         return <div className="dropdown ml-3" key={table.name}>
 
-          <button className="btn btn-secondary" type="button" onClick={() => { onTableClick(i); }}>
+          <button className="btn btn-dark" type="button" onClick={() => { onTableClick(i); }}>
             <span><i className="fa fa-table"></i> {table.name}</span>
             <i className={"fa ml-2 " + (treeView && treeView[i] && treeView[i].show ? "fa-caret-up" : "fa-caret-down")}></i>
           </button>

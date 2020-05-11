@@ -4,7 +4,7 @@ const GlobalContext = createContext();
 
 /** init values global state */
 let initState = {
-  tables: null, 
+  tables: null,
   tableAnCols: null
 };
 

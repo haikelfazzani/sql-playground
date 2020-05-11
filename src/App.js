@@ -6,9 +6,11 @@ import './styles.css';
 
 export default function App () {
   return (
-    <div className="app">
-      <Sidebar />
-      <Playground />
+    <div className="container-fluid">
+      <div className="row flex-xl-nowrap">
+        <Sidebar />
+        <Playground />
+      </div>
     </div>
   );
 }

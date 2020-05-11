@@ -9,7 +9,7 @@ export default function Alert ({ lesson, img, desc, show = false }) {
   }, [show]);
 
   return (
-    <div className="alert alert-success alert-dismissible fade show pr-0 pr-3" role="alert"
+    <div className="alert alert-dark alert-dismissible fade show pr-0 pr-3" role="alert"
       style={{ display: isOpen ? 'block' : 'none' }}>
 
       <h5 className="alert-heading">{lesson}</h5>

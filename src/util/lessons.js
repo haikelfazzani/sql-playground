@@ -99,6 +99,7 @@ FROM books
 LEFT JOIN reviews ON books.id = reviews.book_id
 ORDER BY books.title;`
   },
+  
 ];
 
 export default lessons;
