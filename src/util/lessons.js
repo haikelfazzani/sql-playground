@@ -6,9 +6,12 @@ const lessons = [
 
 -- Example
 
-CREATE TABLE books (
-  bookId int,
-  bookName varchar(255)
+CREATE TABLE teams (
+  id serial,
+  team_name varchar(100) NOT NULL,
+  since int,
+  country varchar(100) NOT NULL,
+  PRIMARY KEY (id)
 );`
   },
   {
@@ -22,11 +25,10 @@ DROP TABLE table_name;`
 
 -- Example
 
-INSERT INTO books (id, title, author) 
-VALUES
-  (1, 'My First SQL Book', 'Mary Parker'),
-  (2, 'My Second SQL Book', 'John Mayer'),
-  (3, 'My First SQL Book', 'Cary Flint');`
+INSERT INTO teams (id, team_name, since, country) 
+  VALUES
+    (8, 'Borussia Dortmund', 1909, 'Germany'),
+    (9, 'Barcelona Fc', 1892, 'Spain');`
   },
   {
     lesson: 'UPDATE', img: '', desc: `
@@ -34,9 +36,11 @@ VALUES
 
 -- Example
 
-UPDATE books
-SET title = 'New title', author = 'New Author'
-WHERE id = 1;`
+UPDATE teams
+SET team_name = 'Arsenal', since=1886
+WHERE id = 1;
+
+SELECT * FROM TEAMS;`
   },
   {
     lesson: 'DELETE', img: '', desc: `
@@ -44,15 +48,27 @@ WHERE id = 1;`
 
 -- Example
 
-DELETE FROM books WHERE id = 1;`
-  },
+DELETE FROM players WHERE id = 1;`
+  },  
   {
     lesson: 'SELECT', img: '', desc: `
 > The SELECT statement is used to select data from a database.
 
 -- Example
 
-SELECT * FROM books;`
+SELECT * FROM players;
+
+> The WHERE clause is used to filter records.
+
+SELECT * FROM players WHERE id=2;`
+  },
+  {
+    lesson: 'SELECT DISTINCT', img: '', desc: `
+> The SELECT DISTINCT statement is used to return only distinct (different) values.
+
+-- Example
+SELECT team_id FROM players;
+SELECT DISTINCT team_id FROM players;`
   },
   {
     lesson: 'LIKE', img: '', desc: `
@@ -60,7 +76,26 @@ SELECT * FROM books;`
 
 -- Example
 
-SELECT * FROM books WHERE title LIKE 'p%';`
+SELECT * FROM teams WHERE team_name LIKE 'a%';`
+  },
+  {
+    lesson: 'BETWEEN', img: '', desc: `
+> The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+
+-- Example
+
+SELECT * FROM players WHERE AGE BETWEEN 20 AND 30;`
+  },
+  {
+    lesson: 'MIN and MAX', img: '', desc: `
+> The MIN() function returns the smallest value of the selected column.
+
+> The MAX() function returns the largest value of the selected column.
+
+-- Example
+
+SELECT MIN(age) AS Min_Age FROM players;
+SELECT MAX(age) AS Max_Age FROM players;`
   },
   {
     lesson: 'COUNT, AVG and SUM', img: '', desc: `
@@ -72,11 +107,31 @@ SELECT * FROM books WHERE title LIKE 'p%';`
 
 -- Example
 
-SELECT COUNT(author) FROM books;
+SELECT COUNT(since) FROM teams;
 
-SELECT AVG(price) FROM books;
+SELECT AVG(since) FROM teams;
 
-SELECT SUM(price) FROM books;`
+SELECT SUM(since) FROM teams;`
+  },
+  {
+    lesson: 'GROUP BY', img: '', desc: `
+> The GROUP BY statement groups rows that have the same values into summary rows, 
+like "find the number of players in each team".
+
+-- Example
+
+SELECT COUNT(country), country FROM teams GROUP BY country;`
+  },
+  {
+    lesson: 'HAVING', img: '', desc: `
+> The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions..
+
+-- Example
+
+SELECT COUNT(id), country
+FROM teams
+GROUP BY country
+HAVING COUNT(id) > 1;`
   },
   {
     lesson: 'INNER JOIN', img: 'https://i.ibb.co/LC1nfgT/img-innerjoin.gif', desc: `
@@ -84,9 +139,9 @@ SELECT SUM(price) FROM books;`
 
 -- Example
 
-SELECT books.title, reviews.reviewer_name
-FROM books
-INNER JOIN reviews ON books.id = reviews.book_id;`
+SELECT teams.team_name, players.player_name
+FROM teams
+INNER JOIN players ON teams.id = players.team_id;`
   },
   {
     lesson: 'LEFT JOIN', img: 'https://i.ibb.co/ZLqjfQn/img-leftjoin.gif', desc: `
@@ -94,12 +149,11 @@ INNER JOIN reviews ON books.id = reviews.book_id;`
 
 -- Example
 
-SELECT books.title, reviews.reviewer_name
-FROM books
-LEFT JOIN reviews ON books.id = reviews.book_id
-ORDER BY books.title;`
-  },
-  
+SELECT teams.team_name, players.player_name
+FROM teams
+LEFT JOIN players ON teams.id = players.team_id
+ORDER BY teams.team_name;`
+  }
 ];
 
 export default lessons;

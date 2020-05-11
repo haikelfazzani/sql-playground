@@ -4,7 +4,7 @@ const fontSizes = ['10px', '12px', '14px', '16px', '18px', '20px', '22px', '24px
 
 export default function SelectFont () {
 
-  const [state, setState] = useState({ fontSize: '14px', showDrop: false });
+  const [state, setState] = useState({ fontSize: '16px', showDrop: false });
 
   const onFont = (font) => {
     document.querySelector('.CodeMirror').style.fontSize = font;

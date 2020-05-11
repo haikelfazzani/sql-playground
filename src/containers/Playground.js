@@ -32,7 +32,9 @@ export default class Playground extends React.Component {
       .then(SQL => {
         this.setState({ db: new SQL.Database() });
         this.onExecute(this.state.editorVal);
-        this.setState({ ...this.state, editorVal: '' });
+
+        let local = localStorage.getItem('siql-query');
+        this.setState({ ...this.state, editorVal: local || '' });
       })
       .catch(err => this.setState({ err }));
 
@@ -88,7 +90,7 @@ export default class Playground extends React.Component {
     let { db, err, results, editorVal } = this.state;
     if (!db) return <pre>Loading...</pre>;
     return (
-      <main className="col-md-9 col-xl-10 mb-5 pl-md-5 bd-content">
+      <main className="col-sm-12 col-md-9 col-xl-10 mb-5 pl-md-5 bd-content">
 
         <nav className="mb-3 d-flex">
           <button className="btn btn-warning mr-3" onClick={this.onExecute}>

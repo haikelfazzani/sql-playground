@@ -12,7 +12,7 @@ body {
 }
 
 .gutter {
-  background-color: rgb(196, 196, 196);
+  background-color: #4e4e4e;
   cursor: row-resize;
 }
 
@@ -32,6 +32,7 @@ body {
 
 .react-codemirror2,
 .CodeMirror {
+  font-size: 16px;
   height: 100%;
   overflow-y: auto;
 }
@@ -41,8 +42,11 @@ body {
   box-shadow: 0 6px 16px 0 rgba(0, 0, 0, .2);
 }
 
-.table th {
+.table th,.table td {
   font-size: 12px;
+}
+
+.table th {
   text-transform: uppercase;
   letter-spacing: 2px;
   overflow: auto;
@@ -103,9 +107,15 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(196, 196, 196);
+  background: #4e4e4e;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--warning);
+}
+
+@media screen and (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
 }
