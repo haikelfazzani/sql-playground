@@ -1,0 +1,14 @@
+.timer {
+  position: relative; 
+  width: 110px; 
+}
+
+.timer-modal {
+  position: absolute;
+  top: 40px;
+  left: -50px;
+  border: 10px solid #3e444a;
+  background-color: var(--dark);
+  padding: 10px;
+  z-index: 999;
+}

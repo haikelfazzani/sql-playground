@@ -1,5 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import { GlobalContext } from '../state/GlobalContext';
+import Timer from '../components/Timer';
 
 export default function Navbar () {
 
@@ -39,6 +40,8 @@ export default function Navbar () {
   }
 
   return (<>
+
+    <Timer />
 
     <button className="btn btn-dark d-small-none ml-3" onClick={() => { document.getElementById('db-file-upload').click(); }}>
       <i className="fa fa-file-upload"></i>

@@ -93,6 +93,7 @@ body {
 /*****************************/
 .db-history {
   height: 100%;
+  max-width: 80%;
   position: fixed;
   right: 0;
   top: 0;
