@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { GlobalContext } from '../state/GlobalContext';
 import Timer from '../components/Timer';
 

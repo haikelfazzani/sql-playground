@@ -26,6 +26,7 @@ export default class Playground extends React.Component {
     this.onEditorChange = this.onEditorChange.bind(this);
     this.onExecute = this.onExecute.bind(this);
     this.onBeautify = this.onBeautify.bind(this);
+    this.onClear = this.onClear.bind(this);
   }
 
   componentDidMount () {
@@ -43,6 +44,7 @@ export default class Playground extends React.Component {
     window.addEventListener('keydown', (e) => {
       if (e.ctrlKey && e.keyCode === 13) { this.onExecute(); }
       if (e.ctrlKey && e.altKey && e.keyCode === 70) { this.onBeautify(); }
+      if (e.ctrlKey && e.altKey && e.keyCode === 67) { this.onClear(); }
     });
   }
 
@@ -72,6 +74,8 @@ export default class Playground extends React.Component {
     this.setState({ ...this.state, editorVal: res });
   }
 
+  onClear() {this.setState({...this.state, editorVal:''}); }
+
   render () {
     let { err, results, editorVal } = this.state;
     if (!this.context.globalState.db) return <pre>Loading...</pre>;
@@ -84,8 +88,12 @@ export default class Playground extends React.Component {
             <button className="btn btn-warning mr-3" onClick={this.onExecute}>
               <i className="fa fa-play"></i> Run</button>
 
-            <button className="btn btn-dark d-small-none" onClick={this.onBeautify}>
+            <button className="btn btn-dark d-small-none mr-3" onClick={this.onBeautify}>
               <i className="fa fa-stream"></i> Beautify
+            </button>
+
+            <button className="btn btn-dark d-small-none" onClick={this.onClear}>
+              <i className="fa fa-trash"></i> clear
             </button>
           </div>
 
