@@ -7,13 +7,15 @@ export default function HistoryDb () {
   const [state, setState] = useState({ tables: null, show: false });
 
   useEffect(() => {
-    if (globalState.db) {
+    try {
       let getTables = globalState.db.exec("select * from sqlite_master where type='table'");
 
       let sqlQueries = [];
       getTables[0].values.forEach(q => { sqlQueries.push(q.reverse()[0]); });
 
       setState({ ...state, tables: sqlQueries });
+    } catch (error) {
+
     }
   }, [globalState.isRunning, globalState.db]);
 

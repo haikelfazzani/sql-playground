@@ -12,8 +12,10 @@ export default function Navbar () {
     let blob = new Blob([arraybuff]);
     let a = document.createElement("a");
     document.body.appendChild(a);
+
     a.href = window.URL.createObjectURL(blob);
     a.download = "sql.db";
+    
     a.onclick = function () {
       setTimeout(function () {
         window.URL.revokeObjectURL(a.href);
@@ -25,17 +27,25 @@ export default function Navbar () {
   const onFile = (e) => {
 
     if (e && e.target && e.target.files[0]) {
-      let { SQL } = globalState;
 
-      let f = e.target.files[0];
-      let r = new FileReader();
-      r.onload = function () {
+      let dbFile = e.target.files[0];
+      let lindex = dbFile.name.lastIndexOf('.');
+      let extension = dbFile.name.slice(lindex);
 
-        let Uints = new Uint8Array(r.result);
-        let db = new SQL.Database(Uints);
-        setGlobalState({ ...globalState, db })
+      if (extension === '.db') {
+        let { SQL } = globalState;
+
+        let r = new FileReader();
+        r.onload = function () {
+
+          try {
+            let Uints = new Uint8Array(r.result);
+            let db = new SQL.Database(Uints);
+            setGlobalState({ ...globalState, db });
+          } catch (error) {}
+        }
+        r.readAsArrayBuffer(dbFile);
       }
-      r.readAsArrayBuffer(f);
     }
   }
 
