@@ -4,8 +4,9 @@ const GlobalContext = createContext();
 
 /** init values global state */
 let initState = {
-  tables: null,
-  tableAnCols: null
+  db: null,
+  fontSize: '16px',
+  isRunning: false
 };
 
 export default function GlobalProvider ({ children }) {

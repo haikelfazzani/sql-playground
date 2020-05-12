@@ -8,7 +8,7 @@ body {
 /****************************/
 .playground {
   width: 100%;
-  height: 100%;
+  height: 80%;
 }
 
 .gutter {
@@ -91,9 +91,32 @@ body {
 }
 
 /*****************************/
+.db-history {
+  height: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 999;    
+  overflow: auto;
+  background-color: #4e4e4e; padding: 10px;
+  transition: all .5s;
+}
+
+.db-history pre {padding: 10px; background-color: var(--dark); color: #ffffff; }
+
+.btn-open-history {
+  position: fixed;
+  right: 1px;
+  bottom: 10px;
+  z-index: 999;
+}
+/****************************/
+
 .fs-12 {font-size: 12px;}
 .border-black {border-top: 2px solid #3e444a;}
 .ltsp2 {letter-spacing: 2px;}
+
+input[type="file"] {display: none;}
 /***************************/
 @keyframes fadeIn {
   from {
@@ -123,4 +146,16 @@ body {
     display: none;
   }
   .d-small-none {display: none;}
+}
+
+/*******************************/
+
+.LeftStretch{
+  animation: LeftStretch .8s ease-out;
+  transform-origin: 100% 0%;
+}
+
+@keyframes LeftStretch {
+  0% { transform: scaleX(0);	}	
+ 100% { transform: scaleX(1); }							
 }

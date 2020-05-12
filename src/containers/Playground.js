@@ -1,22 +1,22 @@
 import React from "react";
+import { GlobalContext } from "../state/GlobalContext";
 import initSqlJs from "sql.js";
 import sqlFormatter from "sql-formatter";
 
 import CodeEditor from '../components/CodeEditor';
 import Table from '../components/Table';
-import createInitTables from "../util/examples";
+import createInitTables from "../util/createInitTables";
 import Snackbar from "../components/Snackbar";
-import { GlobalContext } from "../state/GlobalContext";
+
 import SplitPane from "../components/SplitPane";
-import CreatedTables from "./CreatedTables";
 import SelectFont from "../components/SelectFont";
+import Navbar from "./Navbar";
 
 export default class Playground extends React.Component {
 
   constructor () {
     super();
     this.state = {
-      db: null,
       err: null,
       results: null,
       editorVal: createInitTables(),
@@ -31,8 +31,9 @@ export default class Playground extends React.Component {
   componentDidMount () {
     initSqlJs()
       .then(SQL => {
-        this.setState({ db: new SQL.Database() });
-        this.onExecute(this.state.editorVal);
+        // create init tables: teams and players => show them as html tables
+        this.context.setGlobalState({ db: new SQL.Database(), SQL });
+        this.onExecute();
 
         let local = localStorage.getItem('siql-query');
         this.setState({ ...this.state, editorVal: local || '' });
@@ -40,39 +41,9 @@ export default class Playground extends React.Component {
       .catch(err => this.setState({ err }));
 
     window.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.keyCode === 13) {
-        this.onExecute(this.state.editorVal);
-      }
-
-      if (e.ctrlKey && e.altKey && e.keyCode === 70) {
-        this.onBeautify();
-      }
+      if (e.ctrlKey && e.keyCode === 13) { this.onExecute(); }
+      if (e.ctrlKey && e.altKey && e.keyCode === 70) { this.onBeautify(); }
     });
-  }
-
-  onExecute () {
-    let results = null, tables = null, tableAnCols = null;
-    try {
-      // The sql is executed synchronously on the UI thread. 
-      // You may want to use a web worker
-      results = this.state.db.exec(this.state.editorVal); // an array of objects is returned
-      let getTables = this.state.db.exec(`select name from sqlite_master where type='table'`);
-
-      if (getTables && getTables.length > 0 && getTables[0].values.length > 0) {
-        tables = getTables[0].values.flat();
-
-        // get table colums
-        tableAnCols = tables.map(table => {
-          let res = this.state.db.exec(`select * from ${table}`);
-          return { name: table, columns: res[0].columns }
-        });
-      }
-
-      this.context.setGlobalState({ tables, tableAnCols });
-      this.setState({ ...this.state, results, tables, tableAnCols, err: null });
-    } catch (e) {
-      this.setState({ ...this.state, err: e })
-    }
   }
 
   onEditorChange (v, e, value) {
@@ -82,14 +53,28 @@ export default class Playground extends React.Component {
     }
   }
 
+  onExecute () {
+    let results = null, tables = null, tableAnCols = null;
+    let { globalState, setGlobalState } = this.context;
+
+    try {
+      results = globalState.db.exec(this.state.editorVal);
+      this.setState({ ...this.state, results, tables, tableAnCols, err: null });
+
+      setGlobalState({ ...globalState, isRunning: !globalState.isRunning });
+    } catch (e) {
+      this.setState({ ...this.state, err: e });
+    }
+  }
+
   onBeautify () {
     let res = sqlFormatter.format(this.state.editorVal, { indent: '    ' });
     this.setState({ ...this.state, editorVal: res });
   }
 
   render () {
-    let { db, err, results, editorVal } = this.state;
-    if (!db) return <pre>Loading...</pre>;
+    let { err, results, editorVal } = this.state;
+    if (!this.context.globalState.db) return <pre>Loading...</pre>;
     return (
       <main className="col-sm-12 col-md-9 col-xl-10 mb-5 pl-md-5 bd-content">
 
@@ -101,12 +86,12 @@ export default class Playground extends React.Component {
 
             <button className="btn btn-dark d-small-none" onClick={this.onBeautify}>
               <i className="fa fa-stream"></i> Beautify
-          </button>
-
-            <CreatedTables />
+            </button>
           </div>
 
           <div className="d-flex">
+            <Navbar />
+
             <SelectFont />
             <a className="btn btn-dark ml-3" href="https://github.com/haikelfazzani/kody-web-editor">
               <i className="fab fa-github"></i>

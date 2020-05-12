@@ -15,6 +15,19 @@ SELECT DISTINCT(player_name)
   OR SUBSTR(player_name,-1,1) 
   NOT IN('a','e','i','o','u','A','E','I','O','U');`
   },
+  {
+    lesson: 'question 2', img: '',
+    desc: `
+> Who is the highest paid player?. 
+return this fields -> player_name, salary and team_name
+
+-- Answer
+
+SELECT MAX(salary) player_name, teams.team_name 
+  FROM players
+  JOIN 
+  teams ON players.team_id = teams.id;`
+  },
 ];
 
 export default sqlquestions;

@@ -98,8 +98,8 @@ SELECT * FROM players WHERE AGE BETWEEN 20 AND 30;`
 
 -- Example
 
-SELECT MIN(age) AS Min_Age FROM players;
-SELECT MAX(age) AS Max_Age FROM players;`
+SELECT MIN(salary) AS Min_Salary, player_name FROM players;
+SELECT MAX(salary) AS Max_Salary, player_name FROM players;`
   },
   {
     lesson: 'COUNT, AVG and SUM', img: '', desc: `
@@ -111,11 +111,11 @@ SELECT MAX(age) AS Max_Age FROM players;`
 
 -- Example
 
-SELECT COUNT(since) FROM teams;
+SELECT COUNT(salary) FROM players;
 
-SELECT AVG(since) FROM teams;
+SELECT AVG(salary) FROM players;
 
-SELECT SUM(since) FROM teams;`
+SELECT SUM(salary) FROM players;`
   },
   {
     lesson: 'GROUP BY', img: '', desc: `
