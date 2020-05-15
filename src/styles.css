@@ -2,6 +2,7 @@ body {
   background-color: var(--dark);
   color: #ffffff;
   font-family: 'Open Sans';
+  font-size: 14px;
   overflow-x: hidden;
 }
 
@@ -90,27 +91,7 @@ body {
   letter-spacing: 2px;
 }
 
-/*****************************/
-.db-history {
-  height: 100%;
-  max-width: 80%;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 999;    
-  overflow: auto;
-  background-color: #4e4e4e; padding: 10px;
-  transition: all .5s;
-}
 
-.db-history pre {padding: 10px; background-color: var(--dark); color: #ffffff; }
-
-.btn-open-history {
-  position: fixed;
-  right: 1px;
-  bottom: 10px;
-  z-index: 999;
-}
 /****************************/
 
 .fs-12 {font-size: 12px;}
@@ -142,14 +123,19 @@ input[type="file"] {display: none;}
   background: var(--warning);
 }
 
-@media screen and (max-width: 600px) {
+/****************************************/
+@media screen and (max-width: 768px) {
   .sidebar {
     display: none;
   }
   .d-small-none {display: none;}
+  .w-25 {width: 100% !important;}
+  .container-fluid,.col {padding: 0;}
+  .row {margin: 0;}
+  .bd-content {width: 100% !important;}
 }
 
-/*******************************/
+/************ Animation *******************/
 
 .LeftStretch{
   animation: LeftStretch .8s ease-out;
@@ -160,3 +146,4 @@ input[type="file"] {display: none;}
   0% { transform: scaleX(0);	}	
  100% { transform: scaleX(1); }							
 }
+

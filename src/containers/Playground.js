@@ -5,12 +5,13 @@ import sqlFormatter from "sql-formatter";
 
 import CodeEditor from '../components/CodeEditor';
 import Table from '../components/Table';
-import createInitTables from "../util/createInitTables";
+
 import Snackbar from "../components/Snackbar";
 
 import SplitPane from "../components/SplitPane";
-import SelectFont from "../components/SelectFont";
 import Navbar from "./Navbar";
+
+import createInitTables from "../util/data/createInitTables";
 
 export default class Playground extends React.Component {
 
@@ -74,39 +75,16 @@ export default class Playground extends React.Component {
     this.setState({ ...this.state, editorVal: res });
   }
 
-  onClear() {this.setState({...this.state, editorVal:''}); }
+  onClear () { this.setState({ ...this.state, editorVal: '' }); }
 
   render () {
     let { err, results, editorVal } = this.state;
     if (!this.context.globalState.db) return <pre>Loading...</pre>;
+
     return (
       <main className="col-sm-12 col-md-9 col-xl-10 mb-5 pl-md-5 bd-content">
 
-        <nav className="mb-3 d-flex justify-content-between">
-
-          <div className="d-flex">
-            <button className="btn btn-warning mr-3" onClick={this.onExecute}>
-              <i className="fa fa-play"></i> Run</button>
-
-            <button className="btn btn-dark d-small-none mr-3" onClick={this.onBeautify}>
-              <i className="fa fa-stream"></i> Beautify
-            </button>
-
-            <button className="btn btn-dark d-small-none" onClick={this.onClear}>
-              <i className="fa fa-trash"></i> clear
-            </button>
-          </div>
-
-          <div className="d-flex">
-            <Navbar />
-
-            <SelectFont />
-            <a className="btn btn-dark ml-3" href="https://github.com/haikelfazzani/kody-web-editor">
-              <i className="fab fa-github"></i>
-            </a>
-          </div>
-        </nav>
-
+        <Navbar onExecute={this.onExecute} onBeautify={this.onBeautify} onClear={this.onClear} />
 
         <div className="playground">
 

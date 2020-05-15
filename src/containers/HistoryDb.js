@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../state/GlobalContext';
+import SidebaWrapper from '../components/SidebaWrapper';
 
 export default function HistoryDb () {
 
@@ -19,23 +20,9 @@ export default function HistoryDb () {
     }
   }, [globalState.isRunning, globalState.db]);
 
-  return (<>
-    <div className="db-history LeftStretch"
-      style={{ display: state.show ? 'block' : 'none' }}>
-
-      <button className="btn btn-warning btn-block mb-3 d-small-none"
-        onClick={() => { setState({ ...state, show: !state.show }) }}>
-        <i className="fa fa-database"></i> History tables creations
-    </button>
-
-      {state.tables && state.tables.map((t, i) => {
-        return <pre key={'table' + i}>{t}</pre>
-      })}
-    </div>
-
-    <button className="btn btn-warning btn-open-history d-small-none"
-      onClick={() => { setState({ ...state, show: !state.show }) }}>
-      <i className="fa fa-table"></i>
-    </button>
-  </>);
+  return (
+    <SidebaWrapper show={globalState.isNavOpen}>
+      {state.tables && state.tables.map((t, i) => <pre key={'table' + i}>{t}</pre>)}
+    </SidebaWrapper>
+  );
 }

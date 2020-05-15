@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 const fontSizes = ['10px', '12px', '14px', '16px', '18px', '20px', '22px', '24px'];
 
@@ -6,10 +6,10 @@ export default function SelectFont () {
 
   const [state, setState] = useState({ fontSize: '16px', showDrop: false });
 
-  const onFont = (font) => {
+  const onFont = useCallback((font) => {
     document.querySelector('.CodeMirror').style.fontSize = font;
     setState({ ...state, fontSize: font, showDrop: false });
-  }
+  }, []);
 
   return (
     <div className="dropdown ml-3 d-small-none">

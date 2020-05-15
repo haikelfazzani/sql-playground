@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import lessons from '../util/lessons';
 import Alert from '../components/Alert';
-import sqlquestions from '../util/sqlquestions';
+
+import sqlquestions from '../util/data/sqlquestions';
+import lessons from '../util/data/lessons';
 
 export default function Sidebar () {
 
