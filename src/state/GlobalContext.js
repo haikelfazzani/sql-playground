@@ -6,7 +6,8 @@ const GlobalContext = createContext();
 let initState = {
   db: null,
   fontSize: '16px',
-  isRunning: false
+  isRunning: false,
+  isNavOpen: false // open nav history tables creatation
 };
 
 export default function GlobalProvider ({ children }) {
