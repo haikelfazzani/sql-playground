@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../state/GlobalContext';
 import Timer from '../components/Timer';
 import SelectFont from '../components/SelectFont';
+import FormSavePaste from './FormSavePaste';
+import FormOpenFile from './FormOpenFile';
 
 export default function Navbar ({ onExecute, onBeautify, onClear }) {
 
@@ -24,31 +26,6 @@ export default function Navbar ({ onExecute, onBeautify, onClear }) {
     };
     a.click();
   };
-
-  const onFile = (e) => {
-
-    if (e && e.target && e.target.files[0]) {
-
-      let dbFile = e.target.files[0];
-      let lindex = dbFile.name.lastIndexOf('.');
-      let extension = dbFile.name.slice(lindex);
-
-      if (extension === '.db') {
-        let { SQL } = globalState;
-
-        let r = new FileReader();
-        r.onload = function () {
-
-          try {
-            let Uints = new Uint8Array(r.result);
-            let db = new SQL.Database(Uints);
-            setGlobalState({ ...globalState, db });
-          } catch (error) { }
-        }
-        r.readAsArrayBuffer(dbFile);
-      }
-    }
-  }
 
   const onOpenNav = () => {
     setGlobalState({ ...globalState, isNavOpen: !globalState.isNavOpen })
@@ -79,9 +56,9 @@ export default function Navbar ({ onExecute, onBeautify, onClear }) {
         </button>
       </div>
 
-      <div className="d-flex">
+      <div className="d-flex">        
 
-        <Timer />
+        <FormSavePaste />
 
         <button className="btn btn-dark d-small-none ml-3"
           onClick={() => { document.getElementById('db-file-upload').click(); }}>
@@ -93,10 +70,11 @@ export default function Navbar ({ onExecute, onBeautify, onClear }) {
           <i className="fa fa-download"></i>
         </button>
 
-        <input type="file" onChange={onFile} id="db-file-upload"
-          data-toggle="tooltip" data-placement="bottom" title="Upload Databse .sql" />
+        <FormOpenFile />
 
         <SelectFont />
+
+        <Timer />
 
         <a className="btn btn-dark ml-3" href="https://github.com/haikelfazzani/sql-playground">
           <i className="fab fa-github"></i>

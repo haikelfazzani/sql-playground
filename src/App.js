@@ -5,7 +5,7 @@ import Sidebar from './containers/Sidebar';
 import './styles.css';
 import HistoryDb from './containers/HistoryDb';
 
-export default function App () {
+function App () {
   return (
     <div className="container-fluid">
       <div className="w-100 h-100 row flex-xl-nowrap">
@@ -17,3 +17,5 @@ export default function App () {
     </div>
   );
 }
+
+export default React.memo(App);

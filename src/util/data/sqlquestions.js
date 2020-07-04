@@ -23,7 +23,7 @@ return this fields -> player_name, salary and team_name
 
 -- Answer
 
-SELECT MAX(salary) player_name, teams.team_name 
+SELECT MAX(salary) highest_paid_player, players.PLAYER_NAME, teams.team_name 
   FROM players
   JOIN 
   teams ON players.team_id = teams.id;`

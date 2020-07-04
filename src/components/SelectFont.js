@@ -12,7 +12,7 @@ export default function SelectFont () {
   }, []);
 
   return (
-    <div className="dropdown ml-3 d-small-none">
+    <div className="dropdown ml-3 d-small-none mr-3">
       <button className="btn btn-dark dropdown-toggle" type="button"
         onClick={() => { setState({ ...state, showDrop: !state.showDrop }) }}>
         {state.fontSize}
